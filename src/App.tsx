@@ -1,16 +1,12 @@
-import React from 'react';
-import './App.css'
+import React, { Fragment } from "react";
+import Header from "./components/Header";
 
-function App(): JSX.Element {
-
-  return (
-    <>
-      <main>
-        <h1 className='text-red-500'>Seja bem vindo! :)</h1>
-        <p>Desafio de Galeria de Imagens - Processo Seletivo Frontend Fusion</p>
-      </main>
-    </>
-  );
+function App():JSX.Element{
+  return(
+    <Fragment>
+      <Header/>
+    </Fragment>
+  )
 }
 
 export default App
