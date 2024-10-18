@@ -3,8 +3,10 @@ import HomeView from "./HomeView";
 import { filterContext } from "../../contexts/navigation-context";
 import { FilterType } from "../../types/filter-types";
 import FavoritesView from "./FavoritesView";
+import useImages from "../../hooks/useImages";
 
 function Main():JSX.Element{
+    useImages();
     const {navFilter} = useContext(filterContext)
     
     return(

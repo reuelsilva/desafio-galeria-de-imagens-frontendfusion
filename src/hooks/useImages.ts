@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Context } from "../contexts/gallery-context";
-import { imageProps } from "../types/image-types";
 
 const getLoremPicsum = async (page: number) => {
     const res = await fetch(`https://picsum.photos/v2/list?page=${page}&limit=12`);
@@ -10,8 +9,7 @@ const getLoremPicsum = async (page: number) => {
 }
 
 function useImages(){ 
-    const {page} = useContext(Context)
-    const [images, setImages] = useState<imageProps[] | []>([])
+    const { images, setImages, page } = useContext(Context)
 
     const data = useQuery({
         queryKey: ['images', page], 

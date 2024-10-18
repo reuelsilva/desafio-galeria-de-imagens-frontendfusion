@@ -1,13 +1,10 @@
 import React, { Fragment, useContext, useState } from "react"
-import useImages from "../../../hooks/useImages"
 import { imageProps } from "../../../types/image-types";
 import { Context } from "../../../contexts/gallery-context";
 import Modal from "../Modal";
 
 function HomeView(): JSX.Element {
-
-    const { images } = useImages();
-    const { setPage } = useContext(Context)
+    const { setPage, images } = useContext(Context)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImg, setSelectedImg] = useState<imageProps>({
         author:"", 
