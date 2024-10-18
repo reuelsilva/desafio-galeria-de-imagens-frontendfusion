@@ -8,7 +8,7 @@ export function Header(): JSX.Element {
                 <a href="#" className="cursor-pointer"><img src="/logo.png" alt="Logo" /></a>
                 <Navigation />
             </div>
-            <p className="font-medium">Descubra suas imagens favoritas</p>
+            <p className="font-semibold sm:font-medium">Descubra suas imagens favoritas</p>
         </header>
     )
 }
