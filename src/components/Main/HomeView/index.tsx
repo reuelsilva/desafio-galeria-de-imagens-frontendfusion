@@ -17,7 +17,7 @@ function HomeView(): JSX.Element {
     return (
         <Fragment>
             <div className="flex flex-col items-center gap-4">
-                <div className="grid sm:grid-cols-[repeat(2,_300px)] lg:grid-cols-[repeat(3,_300px)] gap-2 justify-center">
+                <div className="grid sm:grid-cols-[repeat(2,_300px)] lg:grid-cols-[repeat(3,_300px)] gap-2 justify-center min-h-[2268px] sm:min-h-[1330px]">
                     {
                         images.map((image: imageProps, id: number) => {
                             return (
@@ -25,7 +25,7 @@ function HomeView(): JSX.Element {
                                     setIsModalOpen(prev => !prev);
                                     setSelectedImg(image);
                                 }}>
-                                    <img className="h-[215px] w-full transition-all hover:scale-125" src={image.download_url} alt={`Imagem #${image.id}`} />
+                                    <img className="h-[215px] w-full transition-all hover:scale-125" src={image.download_url} alt={`Imagem #${image.id}`}/>
                                 </div>
                             )
                         })
