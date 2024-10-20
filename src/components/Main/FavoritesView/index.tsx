@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState } from "react"
 import { imageProps } from "../../../types/image-types"
 import Modal from "../Modal"
 import { storageContext } from "../../../contexts/localstorage-context"
+import Skeleton from "react-loading-skeleton"
 
 function FavoritesView(): JSX.Element {
     const {favImages} = useContext(storageContext)
@@ -13,6 +14,7 @@ function FavoritesView(): JSX.Element {
         url:"", 
         width:0
     })
+    const [loadedImages, setLoadedImages ] = useState<boolean[]>(Array(favImages.length).fill(false))
 
     return (
         <div>
@@ -26,7 +28,19 @@ function FavoritesView(): JSX.Element {
                                         setIsModalOpen(prev => !prev);
                                         setSelectedImg(image);
                                     }}>
-                                        <img className="h-[215px] w-full transition-all hover:scale-125" src={image.download_url} alt={`Imagem #${image.id}`} />
+                                        {
+                                            !loadedImages[id] && (
+                                                <Skeleton width={300} height={215} />
+                                            )
+                                        }
+
+                                        <img className="h-[215px] w-full transition-all hover:scale-125" src={image.download_url} alt={`Imagem #${image.id}`} onLoad={() => {
+                                            setLoadedImages((prev) => {
+                                                const newLoaderImages = [...prev]
+                                                newLoaderImages[id] = true
+                                                return newLoaderImages
+                                            })
+                                        }} />
                                     </div>
                                 )
                             })}

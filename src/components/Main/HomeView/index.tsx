@@ -2,17 +2,20 @@ import React, { Fragment, useContext, useState } from "react"
 import { imageProps } from "../../../types/image-types";
 import { Context } from "../../../contexts/gallery-context";
 import Modal from "../Modal";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function HomeView(): JSX.Element {
     const { setPage, images } = useContext(Context)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImg, setSelectedImg] = useState<imageProps>({
-        author:"", 
-        download_url: "", 
-        height:0, id:0, 
-        url:"", 
-        width:0
+        author: "",
+        download_url: "",
+        height: 0, id: 0,
+        url: "",
+        width: 0
     })
+    const [loadedImages, setLoadedImages] = useState<boolean[]>(Array(images.length).fill(false))
 
     return (
         <Fragment>
@@ -25,7 +28,20 @@ function HomeView(): JSX.Element {
                                     setIsModalOpen(prev => !prev);
                                     setSelectedImg(image);
                                 }}>
-                                    <img className="h-[215px] w-full transition-all hover:scale-125" src={image.download_url} alt={`Imagem #${image.id}`}/>
+                                    {
+                                        !loadedImages[id] && (
+                                            <Skeleton width={300} height={215} />
+                                        )
+                                    }
+
+                                    <img className="h-[215px] w-full transition-all hover:scale-125" src={image.download_url} alt={`Imagem #${image.id}`} onLoad={() => {
+                                        setLoadedImages((prev) => {
+                                            const newLoadedImages = [...prev]
+                                            newLoadedImages[id] = true
+                                            return newLoadedImages
+                                        })
+                                    }}
+                                    />
                                 </div>
                             )
                         })
